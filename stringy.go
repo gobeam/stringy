@@ -66,11 +66,11 @@ func (i *input) Between(start, end string) StringManipulation {
 	} else if len(input) > 0 {
 		endIndex = len(input)
 	}
-	i.Result = i.Input[startIndex:endIndex]
+	i.Result = strings.TrimSpace(i.Input[startIndex:endIndex])
 	return i
 }
 
-// Boolean dunc return boolean value of string value like on, off, 0, 1, yes, no
+// Boolean func return boolean value of string value like on, off, 0, 1, yes, no
 // returns boolean value of string input
 func (i *input) Boolean() bool {
 	input := getInput(*i)
@@ -86,13 +86,14 @@ func (i *input) Boolean() bool {
 	panic(errors.New("invalid string value to test boolean value"))
 }
 
-// CamelCase function returns camel case value of string
+// CamelCase takes one Param rule and it returns passed string in
+// camel case form and rule helps to omit character you want from string
 // Example input: hello user
 // Result : HelloUser
 func (i *input) CamelCase(rule ...string) string {
 	input := getInput(*i)
 	// removing excess space
-	wordArray := caseHelper(input, true, rule ...)
+	wordArray := caseHelper(input, true, rule...)
 	for i, word := range wordArray {
 		wordArray[i] = ucfirst(word)
 	}
@@ -117,22 +118,30 @@ func (i *input) Delimited(delimiter string, rule ...string) StringManipulation {
 	if strings.TrimSpace(delimiter) == "" {
 		delimiter = "."
 	}
-	wordArray := caseHelper(input, false, rule ...)
+	wordArray := caseHelper(input, false, rule...)
 	i.Result = strings.Join(wordArray, delimiter)
 	return i
 }
 
+// Get simply returns result and can be chained on function which
+// returns StringManipulation interface
 func (i *input) Get() string {
 	return getInput(*i)
 }
 
+// KebabCase takes one Param rule and it returns passed string in
+// kebab case form and rule helps to omit character you want from string
+// Example input: hello user
+// Result : hello-user
 func (i *input) KebabCase(rule ...string) StringManipulation {
 	input := getInput(*i)
-	wordArray := caseHelper(input, false, rule ...)
+	wordArray := caseHelper(input, false, rule...)
 	i.Result = strings.Join(wordArray, "-")
 	return i
 }
 
+// LcFirst simply returns result by lowercasing first letter of string and
+// it can be chained on function which return StringManipulation interface
 func (i *input) LcFirst() string {
 	input := getInput(*i)
 	for i, v := range input {
@@ -141,6 +150,7 @@ func (i *input) LcFirst() string {
 	return input
 }
 
+// Lines returns slice of strings by removing white space characters
 func (i *input) Lines() []string {
 	input := getInput(*i)
 	matchWord := regexp.MustCompile(`[\s]*[\W]\pN`)
@@ -148,6 +158,10 @@ func (i *input) Lines() []string {
 	return strings.Fields(strings.TrimSpace(result))
 }
 
+// Pad takes three param length i.e total length to be after padding,
+// with i.e  what to pad with and pad type which can be (both or left or right)
+// it return string after padding upto length by with param and on padType type
+// it can be chained on function which return StringManipulation interface
 func (i *input) Pad(length int, with, padType string) string {
 	input := getInput(*i)
 	inputLength := len(input)
@@ -173,6 +187,8 @@ func (i *input) Pad(length int, with, padType string) string {
 	}
 }
 
+// RemoveSpecialCharacter removes all special characters and returns the string
+// it can be chained on function which return StringManipulation interface
 func (i *input) RemoveSpecialCharacter() string {
 	input := getInput(*i)
 	var result strings.Builder
@@ -188,15 +204,26 @@ func (i *input) RemoveSpecialCharacter() string {
 	return result.String()
 }
 
+// ReplaceFirst takes two param search and replace
+// it return string by searching search sub string and replacing it
+// with replace substring on first occurrence
+// it can be chained on function which return StringManipulation interface
 func (i *input) ReplaceFirst(search, replace string) string {
 	input := getInput(*i)
 	return replaceStr(input, search, replace, First)
 }
 
+// ReplaceLast takes two param search and replace
+// it return string by searching search sub string and replacing it
+// with replace substring on last occurrence
+// it can be chained on function which return StringManipulation interface
 func (i *input) ReplaceLast(search, replace string) string {
 	input := getInput(*i)
 	return replaceStr(input, search, replace, Last)
 }
+
+// Reverse reverses the passed strings
+// it can be chained on function which return StringManipulation interface
 func (i *input) Reverse() string {
 	input := getInput(*i)
 	r := []rune(input)
@@ -206,6 +233,8 @@ func (i *input) Reverse() string {
 	return string(r)
 }
 
+// Shuffle shuffles the given string randomly
+// it can be chained on function which return StringManipulation interface
 func (i *input) Shuffle() string {
 	input := getInput(*i)
 	rand.Seed(time.Now().Unix())
@@ -217,18 +246,28 @@ func (i *input) Shuffle() string {
 	return string(inRune)
 }
 
+// SnakeCase is variadic function that takes one param rule
+// it returns passed string in snake case form and rule helps to
+// omit character you want from string
+// Example input: hello user
+// Result : hello_user
 func (i *input) SnakeCase(rule ...string) StringManipulation {
 	input := getInput(*i)
-	wordArray := caseHelper(input, false, rule ...)
+	wordArray := caseHelper(input, false, rule...)
 	i.Result = strings.Join(wordArray, "_")
 	return i
 }
 
+// Surround takes one param with which is used to surround user input
+// it can be chained on function which return StringManipulation interface
 func (i *input) Surround(with string) string {
 	input := getInput(*i)
 	return with + input + with
 }
 
+// Tease takes two params length and indicator and it shortens given string
+// on passed length and adds indicator on end
+// it can be chained on function which return StringManipulation interface
 func (i *input) Tease(length int, indicator string) string {
 	input := getInput(*i)
 	if input == "" || len(input) < length {
@@ -237,16 +276,22 @@ func (i *input) Tease(length int, indicator string) string {
 	return input[:length] + indicator
 }
 
+// ToLowerr makes all string of user input to lowercase
+// it can be chained on function which return StringManipulation interface
 func (i *input) ToLower() (result string) {
 	input := getInput(*i)
 	return strings.ToLower(input)
 }
 
+// ToUpper makes all string of user input to uppercase
+// it can be chained on function which return StringManipulation interface
 func (i *input) ToUpper() string {
 	input := getInput(*i)
 	return strings.ToUpper(input)
 }
 
+// UcFirst makes first word of user input to uppercase
+// it can be chained on function which return StringManipulation interface
 func (i *input) UcFirst() string {
 	input := getInput(*i)
 	return ucfirst(input)

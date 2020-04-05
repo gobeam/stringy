@@ -7,21 +7,21 @@ import (
 	"unicode"
 )
 
-func caseHelper(input string,isCamel bool, rule ...string) []string {
+func caseHelper(input string, isCamel bool, rule ...string) []string {
 	if !isCamel {
-		re := regexp.MustCompile("([a-z])([A-Z])")
-		input = re.ReplaceAllString(input, "$1 $2")
+		re := regexp.MustCompile(SelectCapital)
+		input = re.ReplaceAllString(input, ReplaceCapital)
 	}
 	input = strings.Join(strings.Fields(strings.TrimSpace(input)), " ")
 	if len(rule) <= 1 {
 		rule = []string{".", " ", "_", " ", "-", " "}
 	}
 	if len(rule) > 1 && len(rule)%2 != 0 {
-		panic(errors.New("odd number rule provided please provide in even count"))
+		panic(errors.New(OddError))
 	}
 	rule = append(rule, ".", " ", "_", " ", "-", " ")
 
-	replacer := strings.NewReplacer(rule ...)
+	replacer := strings.NewReplacer(rule...)
 	input = replacer.Replace(input)
 	words := strings.Fields(input)
 	return words
