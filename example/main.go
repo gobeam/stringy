@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(strBetween.Between("hello", "name").ToUpper())
 
 	teaseString := New("Hello My name is Roshan. I am full stack developer")
-	fmt.Println(teaseString.Tease(100, "..."))
+	fmt.Println(teaseString.Tease(20, "..."))
 
 	replaceFirst := New("Hello My name is Roshan and his name is Alis.")
 	fmt.Println(replaceFirst.ReplaceFirst("name", "nombre"))
@@ -21,6 +21,8 @@ func main() {
 
 	snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
 	fmt.Println(snakeCase.SnakeCase("?", "").Get())
+	fmt.Println(snakeCase.SnakeCase("?", "").ToUpper())
+	fmt.Println(snakeCase.SnakeCase("?", "").ToLower())
 
 	camelCase := New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
 	fmt.Println(camelCase.CamelCase("?", "", "#", ""))
@@ -38,9 +40,9 @@ func main() {
 	fmt.Println(reverse.Reverse())
 
 	pad := New("Roshan")
-	fmt.Println(pad.Pad(0, "0", "both"))
-	fmt.Println(pad.Pad(0, "0", "left"))
-	fmt.Println(pad.Pad(0, "0", "right"))
+	fmt.Println(pad.Pad(10, "0", "both"))
+	fmt.Println(pad.Pad(10, "0", "left"))
+	fmt.Println(pad.Pad(10, "0", "right"))
 
 	shuffleString := New("roshan")
 	fmt.Println(shuffleString.Shuffle())
@@ -50,5 +52,18 @@ func main() {
 
 	boolString := New("off")
 	fmt.Println(boolString.Boolean())
+
+	surroundStr := New("__")
+	fmt.Println(surroundStr.Surround("-"))
+
+	str := New("hello__man how-Are you??")
+	result := str.CamelCase("?", "")
+	fmt.Println(result) // HelloManHowAreYou
+
+	snakeStr := str.SnakeCase("?", "")
+	fmt.Println(snakeStr.ToLower()) // hello_man_how_are_you
+
+	kebabStr := str.KebabCase("?", "")
+	fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
 
 }

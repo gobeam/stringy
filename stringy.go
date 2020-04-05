@@ -46,8 +46,10 @@ func New(val string) StringManipulation {
 	return &input{Input: val}
 }
 
-// Between takes two param start and end which are string
-// return value after omitting start and end part of input
+// Between takes two string params start and end which and returns
+// value which is in middle of start and end part of input. You can
+// chain to upper which with make result all upercase or ToLower which
+// will make result all lower case or Get which will return result as it is
 func (i *input) Between(start, end string) StringManipulation {
 	if start == "" && end == "" || i.Input == "" {
 		return i
@@ -70,8 +72,9 @@ func (i *input) Between(start, end string) StringManipulation {
 	return i
 }
 
-// Boolean func return boolean value of string value like on, off, 0, 1, yes, no
-// returns boolean value of string input
+// Boolean func returns boolean value of string value like on, off, 0, 1, yes, no
+// returns boolean value of string input. You can chain this function on other function
+// which returns implemented StringManipulation interface
 func (i *input) Boolean() bool {
 	input := getInput(*i)
 	inputLower := strings.ToLower(input)
@@ -86,8 +89,10 @@ func (i *input) Boolean() bool {
 	panic(errors.New("invalid string value to test boolean value"))
 }
 
-// CamelCase takes one Param rule and it returns passed string in
-// camel case form and rule helps to omit character you want from string
+// CamelCase is variadic function which takes one Param rule i.e slice of strings and it returns
+// input type string in camel case form and rule helps to omit character you want to omit from string.
+// By default special characters like "_", "-","."," " are l\treated like word separator and treated
+// accordingly by default and you dont have to worry about it
 // Example input: hello user
 // Result : HelloUser
 func (i *input) CamelCase(rule ...string) string {
@@ -100,8 +105,8 @@ func (i *input) CamelCase(rule ...string) string {
 	return strings.Join(wordArray, "")
 }
 
-// ContainsAll function takes multiple string param and
-// checks if they are present in input
+// ContainsAll is variadic function which takes slice of strings as param and checks if they are present
+// in input and returns boolean value accordingly
 func (i *input) ContainsAll(check ...string) bool {
 	input := getInput(*i)
 	for _, item := range check {
@@ -112,7 +117,10 @@ func (i *input) ContainsAll(check ...string) bool {
 	return true
 }
 
-// Delimited function joins the string by passed delimeter
+// Delimited is variadic function that takes two params delimiter and slice of strings i.e rule. It joins
+// the string by passed delimeter. Rule param helps to omit character you want to omit from string. By
+// default special characters like "_", "-","."," " are l\treated like word separator and treated accordingly
+// by default and you dont have to worry about it.
 func (i *input) Delimited(delimiter string, rule ...string) StringManipulation {
 	input := getInput(*i)
 	if strings.TrimSpace(delimiter) == "" {
@@ -129,8 +137,10 @@ func (i *input) Get() string {
 	return getInput(*i)
 }
 
-// KebabCase takes one Param rule and it returns passed string in
-// kebab case form and rule helps to omit character you want from string
+// KebabCase is variadic function that takes one Param slice of strings named rule and it returns passed string
+// in kebab case form. Rule param helps to omit character you want to omit from string. By default special characters
+// like "_", "-","."," " are l\treated like word separator and treated accordingly by default and you dont have to worry
+// about it. If you don't want to omit any character pass nothing.
 // Example input: hello user
 // Result : hello-user
 func (i *input) KebabCase(rule ...string) StringManipulation {
@@ -140,8 +150,8 @@ func (i *input) KebabCase(rule ...string) StringManipulation {
 	return i
 }
 
-// LcFirst simply returns result by lowercasing first letter of string and
-// it can be chained on function which return StringManipulation interface
+// LcFirst simply returns result by lower casing first letter of string and it can be chained on
+// function which return StringManipulation interface
 func (i *input) LcFirst() string {
 	input := getInput(*i)
 	for i, v := range input {
@@ -158,10 +168,10 @@ func (i *input) Lines() []string {
 	return strings.Fields(strings.TrimSpace(result))
 }
 
-// Pad takes three param length i.e total length to be after padding,
-// with i.e  what to pad with and pad type which can be (both or left or right)
-// it return string after padding upto length by with param and on padType type
-// it can be chained on function which return StringManipulation interface
+// Pad takes three param length i.e total length to be after padding, with i.e  what to pad
+// with and pad type which can be ("both" or "left" or "right") it return string after padding
+// upto length by with param and on padType type it can be chained on function which return
+// StringManipulation interface
 func (i *input) Pad(length int, with, padType string) string {
 	input := getInput(*i)
 	inputLength := len(input)
@@ -204,10 +214,9 @@ func (i *input) RemoveSpecialCharacter() string {
 	return result.String()
 }
 
-// ReplaceFirst takes two param search and replace
-// it return string by searching search sub string and replacing it
-// with replace substring on first occurrence
-// it can be chained on function which return StringManipulation interface
+// ReplaceFirst takes two param search and replace. It returns string by searching search
+// sub string and replacing it with replace substring on first occurrence it can be chained
+// on function which return StringManipulation interface.
 func (i *input) ReplaceFirst(search, replace string) string {
 	input := getInput(*i)
 	return replaceStr(input, search, replace, First)
@@ -246,11 +255,11 @@ func (i *input) Shuffle() string {
 	return string(inRune)
 }
 
-// SnakeCase is variadic function that takes one param rule
-// it returns passed string in snake case form and rule helps to
-// omit character you want from string
-// Example input: hello user
-// Result : hello_user
+// SnakeCase is variadic function that takes one Param slice of strings named rule
+// and it returns passed string in snake case form. Rule param helps to omit character
+// you want to omit from string. By default special characters like "_", "-","."," " are treated
+// like word separator and treated accordingly by default and you don't have to worry about it.
+// If you don't want to omit any character pass nothing.
 func (i *input) SnakeCase(rule ...string) StringManipulation {
 	input := getInput(*i)
 	wordArray := caseHelper(input, false, rule...)
@@ -258,8 +267,8 @@ func (i *input) SnakeCase(rule ...string) StringManipulation {
 	return i
 }
 
-// Surround takes one param with which is used to surround user input
-// it can be chained on function which return StringManipulation interface
+// Surround takes one param with which is used to surround user input and it
+// can be chained on function which return StringManipulation interface.
 func (i *input) Surround(with string) string {
 	input := getInput(*i)
 	return with + input + with
@@ -276,7 +285,7 @@ func (i *input) Tease(length int, indicator string) string {
 	return input[:length] + indicator
 }
 
-// ToLowerr makes all string of user input to lowercase
+// ToLower makes all string of user input to lowercase
 // it can be chained on function which return StringManipulation interface
 func (i *input) ToLower() (result string) {
 	input := getInput(*i)
