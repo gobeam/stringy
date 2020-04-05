@@ -1,4 +1,4 @@
-package string_manipulation
+package stringy
 
 import (
 	"testing"

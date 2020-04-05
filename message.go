@@ -1,5 +1,6 @@
-package string_manipulation
+package stringy
 
+// const below are used in packages
 const (
 	First          = "first"
 	Last           = "last"
@@ -11,5 +12,8 @@ const (
 	ReplaceCapital = "$1 $2"
 )
 
+// False is slice of array for false logical representation in string
 var False = []string{"off", "no", "0", "false"}
+
+// True is slice of array for true logical representation in string
 var True = []string{"on", "yes", "1", "True"}
