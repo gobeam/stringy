@@ -62,15 +62,15 @@ import (
     )
 
 func main() {
-	str := New("hello__man how-Are you??")
-	result := str.CamelCase("?", "")
-	fmt.Println(result) // HelloManHowAreYou
+ str := New("hello__man how-Are you??")
+ result := str.CamelCase("?", "")
+ fmt.Println(result) // HelloManHowAreYou
 
-	snakeStr := str.SnakeCase("?", "")
-	fmt.Println(snakeStr.ToLower()) // hello_man_how_are_you
+ snakeStr := str.SnakeCase("?", "")
+ fmt.Println(snakeStr.ToLower()) // hello_man_how_are_you
 
-	kebabStr := str.KebabCase("?", "")
-	fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
+ kebabStr := str.KebabCase("?", "")
+ fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
 }
 ```
 
@@ -94,8 +94,8 @@ $ dep ensure -add github.com/gobeam/Stringy
 Between takes two string params start and end which and returns value which is in middle of start and end part of input. You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
 ```go
-        strBetween := New("HelloMyName")
-	fmt.Println(strBetween.Between("hello", "name").ToUpper()) // MY
+  strBetween := New("HelloMyName")
+  fmt.Println(strBetween.Between("hello", "name").ToUpper()) // MY
 ```
 
 #### Boolean() bool
@@ -103,8 +103,8 @@ Between takes two string params start and end which and returns value which is i
 Boolean func returns boolean value of string value like on, off, 0, 1, yes, no returns boolean value of string input. You can chain this function on other function which returns implemented StringManipulation interface.
 
 ```go
-        boolString := New("off")
-        fmt.Println(boolString.Boolean()) // false
+  boolString := New("off")
+  fmt.Println(boolString.Boolean()) // false
 ```
 
 #### CamelCase(rule ...string) string
@@ -112,14 +112,14 @@ Boolean func returns boolean value of string value like on, off, 0, 1, yes, no r
 CamelCase is variadic function which takes one Param rule i.e slice of strings and it returns input type string in camel case form and rule helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you dont have to worry about it.
 
 ```go
-        camelCase := New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
-        fmt.Println(camelCase.CamelCase("?", "", "#", "")) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt
+  camelCase := New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
+  fmt.Println(camelCase.CamelCase("?", "", "#", "")) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt
 ```
 look how it omitted ?## from string. If you dont want to omit anything and since it returns plain strings and you cant actually cap all or lower case all camelcase string its not required.
 
 ```go
-        camelCase := New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
-        fmt.Println(camelCase.CamelCase()) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt?##
+  camelCase := New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
+  fmt.Println(camelCase.CamelCase()) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt?##
 ```
 
 #### ContainsAll(check ...string) bool
@@ -127,8 +127,8 @@ look how it omitted ?## from string. If you dont want to omit anything and since
 ContainsAll is variadic function which takes slice of strings as param and checks if they are present in input and returns boolean value accordingly.
 
 ```go
-        contains := New("hello mam how are you??")
-        fmt.Println(contains.ContainsAll("mam", "?")) // true
+  contains := New("hello mam how are you??")
+  fmt.Println(contains.ContainsAll("mam", "?")) // true
 ```
 
 #### Delimited(delimiter string, rule ...string) StringManipulation
@@ -136,8 +136,8 @@ ContainsAll is variadic function which takes slice of strings as param and check
 Delimited is variadic function that takes two params delimiter and slice of strings named rule. It joins the string by passed delimeter. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you dont have to worry about it. If you don't want to omit any character pass empty string.
 
 ```go
-        delimiterString := New("ThisIsOne___messed up string. Can we Really delimeter-case It?")
-        fmt.Println(delimiterString.Delimited("?").Get())
+  delimiterString := New("ThisIsOne___messed up string. Can we Really delimeter-case It?")
+  fmt.Println(delimiterString.Delimited("?").Get())
 ```
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
@@ -152,10 +152,10 @@ Get simply returns result and can be chained on function which returns StringMan
 KebabCase/slugify is variadic function that takes one Param slice of strings named rule and it returns passed string in kebab case or slugify form. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you don't have to worry about it. If you don't want to omit any character pass nothing.
 
 ```go
-        str := New("hello__man how-Are you??")
-        kebabStr := str.KebabCase("?","")
-        fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
-        fmt.Println(kebabStr.Get()) // hello-man-how-Are-you
+  str := New("hello__man how-Are you??")
+  kebabStr := str.KebabCase("?","")
+  fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
+  fmt.Println(kebabStr.Get()) // hello-man-how-Are-you
 ```
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
@@ -165,8 +165,8 @@ You can chain to upper which with make result all uppercase or ToLower which wil
 LcFirst simply returns result by lower casing first letter of string and it can be chained on function which return StringManipulation interface
 
 ```go
-        contains := New("Hello roshan")
-        fmt.Println(contains.LcFirst()) // hello roshan
+  contains := New("Hello roshan")
+  fmt.Println(contains.LcFirst()) // hello roshan
 ```
 
 
@@ -175,8 +175,8 @@ LcFirst simply returns result by lower casing first letter of string and it can 
 Lines returns slice of strings by removing white space characters
 
 ```go
-        lines := New("fòô\r\nbàř\nyolo123")
-        fmt.Println(lines.Lines()) // [fòô bàř yolo123]
+  lines := New("fòô\r\nbàř\nyolo123")
+  fmt.Println(lines.Lines()) // [fòô bàř yolo123]
 ```
 
 
@@ -185,10 +185,10 @@ Lines returns slice of strings by removing white space characters
 Pad takes three param length i.e total length to be after padding, with i.e  what to pad with and pad type which can be ("both" or "left" or "right") it return string after padding upto length by with param and on padType type it can be chained on function which return StringManipulation interface
 
 ```go
-        pad := New("Roshan")
-        fmt.Println(pad.Pad(0, "0", "both"))  // 00Roshan00
-        fmt.Println(pad.Pad(0, "0", "left"))  // 0000Roshan
-        fmt.Println(pad.Pad(0, "0", "right")) // Roshan0000
+  pad := New("Roshan")
+  fmt.Println(pad.Pad(0, "0", "both"))  // 00Roshan00
+  fmt.Println(pad.Pad(0, "0", "left"))  // 0000Roshan
+  fmt.Println(pad.Pad(0, "0", "right")) // Roshan0000
 ```
 
 
@@ -197,8 +197,8 @@ Pad takes three param length i.e total length to be after padding, with i.e  wha
 RemoveSpecialCharacter removes all special characters and returns the string nit can be chained on function which return StringManipulation interface
 
 ```go
-        cleanString := New("special@#remove%%%%")
-        fmt.Println(cleanString.RemoveSpecialCharacter()) // specialremove
+  cleanString := New("special@#remove%%%%")
+  fmt.Println(cleanString.RemoveSpecialCharacter()) // specialremove
 ```
 
 
@@ -207,8 +207,8 @@ RemoveSpecialCharacter removes all special characters and returns the string nit
 ReplaceFirst takes two param search and replace. It returns string by searching search sub string and replacing it with replace substring on first occurrence it can be chained on function which return StringManipulation interface.
 
 ```go
-        replaceFirst := New("Hello My name is Roshan and his name is Alis.")
-        fmt.Println(replaceFirst.ReplaceFirst("name", "nombre")) // Hello My nombre is Roshan and his name is Alis.
+  replaceFirst := New("Hello My name is Roshan and his name is Alis.")
+  fmt.Println(replaceFirst.ReplaceFirst("name", "nombre")) // Hello My nombre is Roshan and his name is Alis.
 ```
 
 
@@ -217,8 +217,8 @@ ReplaceFirst takes two param search and replace. It returns string by searching 
 ReplaceLast takes two param search and replace it return string by searching search sub string and replacing it with replace substring on last occurrence it can be chained on function which return StringManipulation interface
 
 ```go
-        replaceLast := New("Hello My name is Roshan and his name is Alis.")
-        fmt.Println(replaceLast.ReplaceLast("name", "nombre")) // Hello My name is Roshan and his nombre is Alis.
+  replaceLast := New("Hello My name is Roshan and his name is Alis.")
+  fmt.Println(replaceLast.ReplaceLast("name", "nombre")) // Hello My name is Roshan and his nombre is Alis.
 ```
 
 
@@ -227,8 +227,8 @@ ReplaceLast takes two param search and replace it return string by searching sea
 Reverse function reverses the passed strings it can be chained on function which return StringManipulation interface.
 
 ```go
-        reverse := New("This is only test")
-        fmt.Println(reverse.Reverse()) // tset ylno si sihT
+  reverse := New("This is only test")
+  fmt.Println(reverse.Reverse()) // tset ylno si sihT
 ```
 
 
@@ -237,8 +237,8 @@ Reverse function reverses the passed strings it can be chained on function which
 Shuffle shuffles the given string randomly it can be chained on function which return StringManipulation interface.
 
 ```go
-        shuffleString := New("roshan")
-        fmt.Println(shuffleString.Shuffle()) // nhasro
+  shuffleString := New("roshan")
+  fmt.Println(shuffleString.Shuffle()) // nhasro
 ```
 
 
@@ -247,8 +247,8 @@ Shuffle shuffles the given string randomly it can be chained on function which r
 Surround takes one param with which is used to surround user input and it can be chained on function which return StringManipulation interface.
 
 ```go
-        surroundStr := New("__")
-        fmt.Println(surroundStr.Surround("-")) // -__-
+  surroundStr := New("__")
+  fmt.Println(surroundStr.Surround("-")) // -__-
 ```
 
 
@@ -257,9 +257,9 @@ Surround takes one param with which is used to surround user input and it can be
 SnakeCase is variadic function that takes one Param slice of strings named rule and it returns passed string in snake case form. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you don't have to worry about it. If you don't want to omit any character pass nothing.
 
 ```go
-        snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
-        fmt.Println(snakeCase.SnakeCase("?", "").Get()) // This_Is_One_messed_up_string_Can_we_Really_Snake_Case_It
-        fmt.Println(snakeCase.SnakeCase("?", "").ToUpper()) // THIS_IS_ONE_MESSED_UP_STRING_CAN_WE_REALLY_SNAKE_CASE_IT
+  snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
+  fmt.Println(snakeCase.SnakeCase("?", "").Get()) // This_Is_One_messed_up_string_Can_we_Really_Snake_Case_It
+  fmt.Println(snakeCase.SnakeCase("?", "").ToUpper()) // THIS_IS_ONE_MESSED_UP_STRING_CAN_WE_REALLY_SNAKE_CASE_IT
 ```
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
@@ -269,8 +269,8 @@ You can chain to upper which with make result all uppercase or ToLower which wil
 Tease takes two params length and indicator and it shortens given string on passed length and adds indicator on end it can be chained on function which return StringManipulation interface.
 
 ```go
-        teaseString := New("Hello My name is Roshan. I am full stack developer")
-        fmt.Println(teaseString.Tease(20, "...")) // Hello My name is Ros...
+  teaseString := New("Hello My name is Roshan. I am full stack developer")
+  fmt.Println(teaseString.Tease(20, "...")) // Hello My name is Ros...
 ```
 
 
@@ -279,8 +279,8 @@ Tease takes two params length and indicator and it shortens given string on pass
 ToLower makes all string of user input to lowercase and it can be chained on function which return StringManipulation interface.
 
 ```go
-        snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
-        fmt.Println(snakeCase.SnakeCase("?", "").ToLower()) // this_is_one_messed_up_string_can_we_really_snake_case_it
+  snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
+  fmt.Println(snakeCase.SnakeCase("?", "").ToLower()) // this_is_one_messed_up_string_can_we_really_snake_case_it
 ```
 
 
@@ -289,8 +289,8 @@ ToLower makes all string of user input to lowercase and it can be chained on fun
 ToUpper makes all string of user input to uppercase and it can be chained on function which return StringManipulation interface.
 
 ```go
-        snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
-        fmt.Println(snakeCase.SnakeCase("?", "").ToUpper()) // THIS_IS_ONE_MESSED_UP_STRING_CAN_WE_REALLY_SNAKE_CASE_IT
+  snakeCase := New("ThisIsOne___messed up string. Can we Really Snake Case It?")
+  fmt.Println(snakeCase.SnakeCase("?", "").ToUpper()) // THIS_IS_ONE_MESSED_UP_STRING_CAN_WE_REALLY_SNAKE_CASE_IT
 ```
 
 
@@ -299,8 +299,8 @@ ToUpper makes all string of user input to uppercase and it can be chained on fun
 LcFirst simply returns result by lower casing first letter of string and it can be chained on function which return StringManipulation interface.
 
 ```go
-        contains := New("hello roshan")
-        fmt.Println(contains.UcFirst()) // Hello roshan
+  contains := New("hello roshan")
+  fmt.Println(contains.UcFirst()) // Hello roshan
 ```
 
 
