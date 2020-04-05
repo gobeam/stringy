@@ -54,15 +54,24 @@ A Golang string manipulation utility which have many useful functionality like c
 Golang has very rich strings core package but some extra helper function and not available and this stringy package is here to fill that void. Plus there are other some packages in golang, that have same functionality but for some extreme cases they fail to provide correct output. This package cross flexibility is it's main advantage. You can convert to camelcase  to snakecase or kebabcase or vice versa. 
 
 ```go
-        str := New("hello__man how-Are you??")
-	result := str.CamelCase("?","")
+package main
+
+import (
+	"fmt"
+	. "github.com/gobeam/Stringy"
+    )
+
+func main() {
+	str := New("hello__man how-Are you??")
+	result := str.CamelCase("?", "")
 	fmt.Println(result) // HelloManHowAreYou
 
-	snakeStr := str.SnakeCase("?","")
+	snakeStr := str.SnakeCase("?", "")
 	fmt.Println(snakeStr.ToLower()) // hello_man_how_are_you
 
-	kebabStr := str.KebabCase("?","")
+	kebabStr := str.KebabCase("?", "")
 	fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
+}
 ```
 
 ## Installation
@@ -80,7 +89,7 @@ $ dep ensure -add github.com/gobeam/Stringy
 
 ## Functions
 
-##### Between(start, end string) StringManipulation
+#### Between(start, end string) StringManipulation
 
 Between takes two string params start and end which and returns value which is in middle of start and end part of input. You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
@@ -89,7 +98,7 @@ Between takes two string params start and end which and returns value which is i
 	fmt.Println(strBetween.Between("hello", "name").ToUpper()) // MY
 ```
 
-##### Boolean() bool
+#### Boolean() bool
 
 Boolean func returns boolean value of string value like on, off, 0, 1, yes, no returns boolean value of string input. You can chain this function on other function which returns implemented StringManipulation interface.
 
@@ -98,7 +107,7 @@ Boolean func returns boolean value of string value like on, off, 0, 1, yes, no r
         fmt.Println(boolString.Boolean()) // false
 ```
 
-##### CamelCase(rule ...string) string
+#### CamelCase(rule ...string) string
 
 CamelCase is variadic function which takes one Param rule i.e slice of strings and it returns input type string in camel case form and rule helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you dont have to worry about it.
 
@@ -113,7 +122,7 @@ look how it omitted ?## from string. If you dont want to omit anything and since
         fmt.Println(camelCase.CamelCase()) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt?##
 ```
 
-##### ContainsAll(check ...string) bool
+#### ContainsAll(check ...string) bool
 
 ContainsAll is variadic function which takes slice of strings as param and checks if they are present in input and returns boolean value accordingly.
 
@@ -122,7 +131,7 @@ ContainsAll is variadic function which takes slice of strings as param and check
         fmt.Println(contains.ContainsAll("mam", "?")) // true
 ```
 
-##### Delimited(delimiter string, rule ...string) StringManipulation
+#### Delimited(delimiter string, rule ...string) StringManipulation
 
 Delimited is variadic function that takes two params delimiter and slice of strings named rule. It joins the string by passed delimeter. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you dont have to worry about it. If you don't want to omit any character pass empty string.
 
@@ -133,12 +142,12 @@ Delimited is variadic function that takes two params delimiter and slice of stri
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
 
-##### Get() string
+#### Get() string
 
 Get simply returns result and can be chained on function which returns StringManipulation interface view above examples
 
 
-##### KebabCase(rule ...string) StringManipulation
+#### KebabCase(rule ...string) StringManipulation
 
 KebabCase/slugify is variadic function that takes one Param slice of strings named rule and it returns passed string in kebab case or slugify form. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you don't have to worry about it. If you don't want to omit any character pass nothing.
 
@@ -151,7 +160,7 @@ KebabCase/slugify is variadic function that takes one Param slice of strings nam
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
 
-##### LcFirst() string
+#### LcFirst() string
 
 LcFirst simply returns result by lower casing first letter of string and it can be chained on function which return StringManipulation interface
 
@@ -161,7 +170,7 @@ LcFirst simply returns result by lower casing first letter of string and it can 
 ```
 
 
-##### Lines() []string
+#### Lines() []string
 
 Lines returns slice of strings by removing white space characters
 
@@ -171,7 +180,7 @@ Lines returns slice of strings by removing white space characters
 ```
 
 
-##### Pad(length int, with, padType string) string
+#### Pad(length int, with, padType string) string
 
 Pad takes three param length i.e total length to be after padding, with i.e  what to pad with and pad type which can be ("both" or "left" or "right") it return string after padding upto length by with param and on padType type it can be chained on function which return StringManipulation interface
 
@@ -183,7 +192,7 @@ Pad takes three param length i.e total length to be after padding, with i.e  wha
 ```
 
 
-##### RemoveSpecialCharacter() string
+#### RemoveSpecialCharacter() string
 
 RemoveSpecialCharacter removes all special characters and returns the string nit can be chained on function which return StringManipulation interface
 
@@ -193,7 +202,7 @@ RemoveSpecialCharacter removes all special characters and returns the string nit
 ```
 
 
-##### ReplaceFirst(search, replace string) string
+#### ReplaceFirst(search, replace string) string
 
 ReplaceFirst takes two param search and replace. It returns string by searching search sub string and replacing it with replace substring on first occurrence it can be chained on function which return StringManipulation interface.
 
@@ -203,7 +212,7 @@ ReplaceFirst takes two param search and replace. It returns string by searching 
 ```
 
 
-##### ReplaceLast(search, replace string) string
+#### ReplaceLast(search, replace string) string
 
 ReplaceLast takes two param search and replace it return string by searching search sub string and replacing it with replace substring on last occurrence it can be chained on function which return StringManipulation interface
 
@@ -213,7 +222,7 @@ ReplaceLast takes two param search and replace it return string by searching sea
 ```
 
 
-##### Reverse() string
+#### Reverse() string
 
 Reverse function reverses the passed strings it can be chained on function which return StringManipulation interface.
 
@@ -223,7 +232,7 @@ Reverse function reverses the passed strings it can be chained on function which
 ```
 
 
-##### Shuffle() string
+#### Shuffle() string
 
 Shuffle shuffles the given string randomly it can be chained on function which return StringManipulation interface.
 
@@ -233,7 +242,7 @@ Shuffle shuffles the given string randomly it can be chained on function which r
 ```
 
 
-##### Surround(with string) string
+#### Surround(with string) string
 
 Surround takes one param with which is used to surround user input and it can be chained on function which return StringManipulation interface.
 
@@ -243,7 +252,7 @@ Surround takes one param with which is used to surround user input and it can be
 ```
 
 
-##### SnakeCase(rule ...string) StringManipulation
+#### SnakeCase(rule ...string) StringManipulation
 
 SnakeCase is variadic function that takes one Param slice of strings named rule and it returns passed string in snake case form. Rule param helps to omit character you want to omit from string. By default special characters like "_", "-","."," " are treated like word separator and treated accordingly by default and you don't have to worry about it. If you don't want to omit any character pass nothing.
 
@@ -255,7 +264,7 @@ SnakeCase is variadic function that takes one Param slice of strings named rule 
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
 
-##### Tease(length int, indicator string) string
+#### Tease(length int, indicator string) string
 
 Tease takes two params length and indicator and it shortens given string on passed length and adds indicator on end it can be chained on function which return StringManipulation interface.
 
@@ -265,7 +274,7 @@ Tease takes two params length and indicator and it shortens given string on pass
 ```
 
 
-##### ToLower() string
+#### ToLower() string
 
 ToLower makes all string of user input to lowercase and it can be chained on function which return StringManipulation interface.
 
@@ -275,7 +284,7 @@ ToLower makes all string of user input to lowercase and it can be chained on fun
 ```
 
 
-##### ToUpper() string
+#### ToUpper() string
 
 ToUpper makes all string of user input to uppercase and it can be chained on function which return StringManipulation interface.
 
@@ -285,7 +294,7 @@ ToUpper makes all string of user input to uppercase and it can be chained on fun
 ```
 
 
-##### UcFirst() string
+#### UcFirst() string
 
 LcFirst simply returns result by lower casing first letter of string and it can be chained on function which return StringManipulation interface.
 
