@@ -1,0 +1,11 @@
+language: go
+sudo: false
+go_import_path: github.com/gobeam/Stringy
+go:
+- 1.9
+
+script:
+- go test
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)

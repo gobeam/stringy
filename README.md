@@ -1,4 +1,6 @@
-# Golang Stringy
+# Golang String manipulation helper package
+[![Build][Build-Status-Image]][Build-Status-Url] [![Go Report Card](https://goreportcard.com/badge/github.com/gobeam/Stringy?branch=master&kill_cache=1)](https://goreportcard.com/report/github.com/gobeam/Stringy) [![GoDoc][godoc-image]][godoc-url]
+
 A Golang string manipulation utility which have many useful functionality like camelcase, snakecase, kebabcase or slugify, custom delimiter, between, and able to uppercase or lowercase them as needed. You can convert camelcase to snakecase or kebabcase, or snakecase to camelcase and kebabcase and vice versa. This package was inspired from PHP [danielstjules/Stringy](https://github.com/danielstjules/Stringy).
 
 * [Why?](#why)
@@ -310,5 +312,8 @@ Please make sure to update tests as appropriate.
 
 Released under the MIT License - see `LICENSE.txt` for details.
 
-
+[Build-Status-Url]: https://travis-ci.org/gobeam/Stringy
+[Build-Status-Image]: https://travis-ci.org/gobeam/Stringy.svg?branch=master
+[godoc-url]: https://pkg.go.dev/github.com/gobeam/Stringy?tab=doc
+[godoc-image]: https://godoc.org/github.com/gobeam/Stringy?status.svg
 
