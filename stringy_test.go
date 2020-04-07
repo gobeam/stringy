@@ -158,3 +158,19 @@ func TestInput_UcFirst(t *testing.T) {
 		t.Errorf("Expected: to be %s but got: %s", against, val)
 	}
 }
+
+func TestInput_First(t *testing.T) {
+	fcn := New("4111 1111 1111 1111")
+	against := "4111"
+	if first := fcn.First(4); first != against {
+		t.Errorf("Expected: to be %s but got: %s", against, first)
+	}
+}
+
+func TestInput_Last(t *testing.T) {
+	lcn := New("4111 1111 1111 1348")
+	against := "1348"
+	if last := lcn.Last(4); last != against {
+		t.Errorf("Expected: to be %s but got: %s", against, last)
+	}
+}

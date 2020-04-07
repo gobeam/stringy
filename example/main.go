@@ -66,4 +66,12 @@ func main() {
 	kebabStr := str.KebabCase("?", "")
 	fmt.Println(kebabStr.ToUpper()) // HELLO-MAN-HOW-ARE-YOU
 
+	fcn := stringy.New("4111 1111 1111 1111")
+	first := fcn.First(4)
+	fmt.Println(first) // 4111
+
+	lcn := stringy.New("4111 1111 1111 1348")
+	last := lcn.Last(4)
+	fmt.Println(last) // 1348
+
 }

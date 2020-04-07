@@ -23,8 +23,10 @@ type StringManipulation interface {
 	CamelCase(rule ...string) string
 	ContainsAll(check ...string) bool
 	Delimited(delimiter string, rule ...string) StringManipulation
+	First(length int) string
 	Get() string
 	KebabCase(rule ...string) StringManipulation
+	Last(length int) string
 	LcFirst() string
 	Lines() []string
 	Pad(length int, with, padType string) string
@@ -86,7 +88,7 @@ func (i *input) Boolean() bool {
 	if on {
 		return true
 	}
-	panic(errors.New("invalid string value to test boolean value"))
+	panic(errors.New(InvalidLogicalString))
 }
 
 // CamelCase is variadic function which takes one Param rule i.e slice of strings and it returns
@@ -131,6 +133,16 @@ func (i *input) Delimited(delimiter string, rule ...string) StringManipulation {
 	return i
 }
 
+// First returns first n characters from provided input. It removes all spaces in string before doing so.
+func (i *input) First(length int) string {
+	input := getInput(*i)
+	input = strings.ReplaceAll(input, " ", "")
+	if len(input) < length {
+		panic(errors.New(LengthError))
+	}
+	return input[0:length]
+}
+
 // Get simply returns result and can be chained on function which
 // returns StringManipulation interface
 func (i *input) Get() string {
@@ -148,6 +160,18 @@ func (i *input) KebabCase(rule ...string) StringManipulation {
 	wordArray := caseHelper(input, false, rule...)
 	i.Result = strings.Join(wordArray, "-")
 	return i
+}
+
+// Last returns last n characters from provided input. It removes all spaces in string before doing so.
+func (i *input) Last(length int) string {
+	input := getInput(*i)
+	input = strings.ReplaceAll(input, " ", "")
+	inputLen := len(input)
+	if len(input) < length {
+		panic(errors.New(LengthError))
+	}
+	start := inputLen - length
+	return input[start:inputLen]
 }
 
 // LcFirst simply returns result by lower casing first letter of string and it can be chained on

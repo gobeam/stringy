@@ -46,6 +46,11 @@ A Golang string manipulation utility which have many useful functionality like c
         <td><a href="#toupper-string">ToUpper</a></td>
         <td><a href="#ucfirst-string">UcFirst</a></td>
     </tr>
+     <tr>
+            <td><a href="#firstlength-int-string">First</a></td>
+            <td><a href="#lastlength-int-string">ToUpper</a></td>
+            <td></td>
+        </tr>
 </table>
 
 
@@ -142,6 +147,17 @@ Delimited is variadic function that takes two params delimiter and slice of stri
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
 
+#### First(length int) string
+
+First returns first n characters from provided input. It removes all spaces in string before doing so.
+
+```go
+  fcn := stringy.New("4111 1111 1111 1111")
+  first := fcn.First(4)
+  fmt.Println(first) // 4111
+```
+
+
 #### Get() string
 
 Get simply returns result and can be chained on function which returns StringManipulation interface view above examples
@@ -158,6 +174,17 @@ KebabCase/slugify is variadic function that takes one Param slice of strings nam
   fmt.Println(kebabStr.Get()) // hello-man-how-Are-you
 ```
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
+
+
+#### Last(length int) string
+
+Last returns last n characters from provided input. It removes all spaces in string before doing so.
+
+```go
+  lcn := stringy.New("4111 1111 1111 1348")
+  last := lcn.Last(4)
+  fmt.Println(last) // 1348
+```
 
 
 #### LcFirst() string
