@@ -48,7 +48,7 @@ A Golang string manipulation utility which have many useful functionality like c
     </tr>
      <tr>
             <td><a href="#firstlength-int-string">First</a></td>
-            <td><a href="#lastlength-int-string">ToUpper</a></td>
+            <td><a href="#lastlength-int-string">Last</a></td>
             <td></td>
         </tr>
 </table>
