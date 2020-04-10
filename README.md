@@ -48,7 +48,7 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
     </tr>
      <tr>
             <td><a href="#firstlength-int-string">First</a></td>
-            <td><a href="#lastlength-int-string">ToUpper</a></td>
+            <td><a href="#lastlength-int-string">Last</a></td>
             <td></td>
         </tr>
 </table>
