@@ -349,6 +349,7 @@ Please make sure to update tests as appropriate.
 
 Released under the MIT License - see `LICENSE.txt` for details.
 
+
 [Build-Status-Url]: https://travis-ci.org/gobeam/Stringy
 [Build-Status-Image]: https://travis-ci.org/gobeam/Stringy.svg?branch=master
 [godoc-url]: https://pkg.go.dev/github.com/gobeam/Stringy?tab=doc
