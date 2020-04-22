@@ -1,6 +1,6 @@
 # Golang String manipulation helper package
 [![Build][Build-Status-Image]][Build-Status-Url] [![Go Report Card](https://goreportcard.com/badge/github.com/gobeam/Stringy?branch=master&kill_cache=1)](https://goreportcard.com/report/github.com/gobeam/Stringy) [![GoDoc][godoc-image]][godoc-url]
-[![Coverage](http://gocover.io/_badge/github.com/gobeam/Stringy?0)](http://gocover.io/github.com/gobeam/Stringy)
+[![Coverage Status](https://coveralls.io/repos/github/gobeam/Stringy/badge.svg)](https://coveralls.io/github/gobeam/Stringy)
 
 Convert string to camel case, snake case, kebab case / slugify, custom delimiter, pad string, tease string and many other functionality with help of by Stringy package. You can convert camelcase to snakecase or kebabcase, or snakecase to camelcase and kebabcase and vice versa. This package was inspired from PHP [danielstjules/Stringy](https://github.com/danielstjules/Stringy).
 
