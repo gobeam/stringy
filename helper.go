@@ -13,10 +13,7 @@ func caseHelper(input string, isCamel bool, rule ...string) []string {
 		input = re.ReplaceAllString(input, ReplaceCapital)
 	}
 	input = strings.Join(strings.Fields(strings.TrimSpace(input)), " ")
-	if len(rule) <= 1 {
-		rule = []string{".", " ", "_", " ", "-", " "}
-	}
-	if len(rule) > 1 && len(rule)%2 != 0 {
+	if len(rule) > 0 && len(rule)%2 != 0 {
 		panic(errors.New(OddError))
 	}
 	rule = append(rule, ".", " ", "_", " ", "-", " ")

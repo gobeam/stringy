@@ -13,6 +13,22 @@ func TestInput_Between(t *testing.T) {
 	}
 }
 
+func TestInput_EmptyBetween(t *testing.T) {
+	sm := New("This is example.")
+	val := sm.Between("", "").ToUpper()
+	if val != "THIS IS EXAMPLE." {
+		t.Errorf("Expected: %s but got: %s", "THIS IS EXAMPLE.", val)
+	}
+}
+
+func TestInput_EmptyNoMatchBetween(t *testing.T) {
+	sm := New("This is example.")
+	val := sm.Between("hello", "test").ToUpper()
+	if val != "THIS IS EXAMPLE." {
+		t.Errorf("Expected: %s but got: %s", "THIS IS EXAMPLE.", val)
+	}
+}
+
 func TestInput_Boolean(t *testing.T) {
 	str := New("on")
 	val := str.Boolean()
@@ -21,10 +37,53 @@ func TestInput_Boolean(t *testing.T) {
 	}
 }
 
+func TestInput_BooleanOff(t *testing.T) {
+	str := New("off")
+	val := str.Boolean()
+	if val {
+		t.Errorf("Expected: to be false but got: %v", val)
+	}
+}
+
+func TestInput_BooleanError(t *testing.T) {
+	defer func() {
+		if err := recover(); err == nil {
+			t.Errorf("Error expected")
+		}
+	}()
+	str := New("invalid")
+	val := str.Boolean()
+	if val {
+		t.Errorf("Expected: to be false but got: %v", val)
+	}
+}
+
 func TestInput_CamelCase(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
 	val := str.CamelCase("%", "")
 	if val != "CamelCaseThisComplicatedString" {
+		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
+	}
+}
+
+func TestInput_CamelCaseNoRule(t *testing.T) {
+	str := New("Camel case this_complicated__string%%")
+	val := str.CamelCase()
+	if val != "CamelCaseThisComplicatedString%%" {
+		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
+	}
+}
+
+func TestInput_CamelCaseOddRuleError(t *testing.T) {
+	defer func() {
+		if err := recover(); err == nil {
+			t.Errorf("Error expected")
+		}
+	}()
+	str := New("Camel case this_complicated__string%%")
+	val := str.CamelCase("%")
+
+	if val != "CamelCaseThisComplicatedString%%" {
 		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
 	}
 }
@@ -47,6 +106,14 @@ func TestInput_Delimited(t *testing.T) {
 	}
 }
 
+func TestInput_DelimitedNoDelimeter(t *testing.T) {
+	str := New("Delimited case this_complicated__string@@")
+	against := "delimited.case.this.complicated.string@@"
+	if val := str.Delimited("").ToLower(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+}
+
 func TestInput_KebabCase(t *testing.T) {
 	str := New("Kebab case this-complicated___string@@")
 	against := "Kebab-case-this-complicated-string"
@@ -56,8 +123,16 @@ func TestInput_KebabCase(t *testing.T) {
 }
 
 func TestInput_LcFirst(t *testing.T) {
-	str := New("this is an all lower")
-	against := "This is an all lower"
+	str := New("This is an all lower")
+	against := "this is an all lower"
+	if val := str.LcFirst(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+}
+
+func TestInput_LcFirstEmpty(t *testing.T) {
+	str := New("")
+	against := ""
 	if val := str.LcFirst(); val != against {
 		t.Errorf("Expected: to be %s but got: %s", against, val)
 	}
@@ -87,6 +162,23 @@ func TestInput_Pad(t *testing.T) {
 	}
 }
 
+func TestInput_PadInvalidLength(t *testing.T) {
+	pad := New("Roshan")
+	if result := pad.Pad(6, "0", "both"); result != "Roshan" {
+		t.Errorf("Expected: %s but got: %s", "Roshan", result)
+	}
+	if result := pad.Pad(6, "0", "left"); result != "Roshan" {
+		t.Errorf("Expected: %s but got: %s", "Roshan", result)
+	}
+	if result := pad.Pad(6, "0", "right"); result != "Roshan" {
+		t.Errorf("Expected: %s but got: %s", "Roshan", result)
+	}
+
+	if result := pad.Pad(13, "0", "middle"); result != "Roshan" {
+		t.Errorf("Expected: %s but got: %s", "Roshan", result)
+	}
+}
+
 func TestInput_RemoveSpecialCharacter(t *testing.T) {
 	cleanString := New("special@#remove%%%%")
 	against := "specialremove"
@@ -98,6 +190,14 @@ func TestInput_RemoveSpecialCharacter(t *testing.T) {
 func TestInput_ReplaceFirst(t *testing.T) {
 	replaceFirst := New("Hello My name is Roshan and his name is Alis.")
 	against := "Hello My nombre is Roshan and his name is Alis."
+	if result := replaceFirst.ReplaceFirst("name", "nombre"); result != against {
+		t.Errorf("Expected: %s but got: %s", against, result)
+	}
+}
+
+func TestInput_ReplaceFirstEmptyInput(t *testing.T) {
+	replaceFirst := New("")
+	against := ""
 	if result := replaceFirst.ReplaceFirst("name", "nombre"); result != against {
 		t.Errorf("Expected: %s but got: %s", against, result)
 	}
@@ -151,9 +251,25 @@ func TestInput_Tease(t *testing.T) {
 	}
 }
 
+func TestInput_TeaseEmpty(t *testing.T) {
+	str := New("This is just simple paragraph on lorem ipsum.")
+	against := "This is just simple paragraph on lorem ipsum."
+	if val := str.Tease(200, "..."); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+}
+
 func TestInput_UcFirst(t *testing.T) {
 	str := New("this is test")
 	against := "This is test"
+	if val := str.UcFirst(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+}
+
+func TestInput_EmptyUcFirst(t *testing.T) {
+	str := New("")
+	against := ""
 	if val := str.UcFirst(); val != against {
 		t.Errorf("Expected: to be %s but got: %s", against, val)
 	}
@@ -165,6 +281,26 @@ func TestInput_First(t *testing.T) {
 	if first := fcn.First(4); first != against {
 		t.Errorf("Expected: to be %s but got: %s", against, first)
 	}
+}
+
+func TestInput_FirstError(t *testing.T) {
+	defer func() {
+		if err := recover(); err == nil {
+			t.Errorf("Error expected but got none")
+		}
+	}()
+	fcn := New("4111 1111 1111 1111")
+	fcn.First(100)
+}
+
+func TestInput_LastError(t *testing.T) {
+	defer func() {
+		if err := recover(); err == nil {
+			t.Errorf("Error expected but got none")
+		}
+	}()
+	fcn := New("4111 1111 1111 1111")
+	fcn.Last(100)
 }
 
 func TestInput_Last(t *testing.T) {

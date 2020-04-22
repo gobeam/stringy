@@ -53,7 +53,7 @@ func New(val string) StringManipulation {
 // chain to upper which with make result all upercase or ToLower which
 // will make result all lower case or Get which will return result as it is
 func (i *input) Between(start, end string) StringManipulation {
-	if start == "" && end == "" || i.Input == "" {
+	if (start == "" && end == "") || i.Input == "" {
 		return i
 	}
 
@@ -179,7 +179,7 @@ func (i *input) Last(length int) string {
 func (i *input) LcFirst() string {
 	input := getInput(*i)
 	for i, v := range input {
-		return string(unicode.ToUpper(v)) + input[i+1:]
+		return string(unicode.ToLower(v)) + input[i+1:]
 	}
 	return input
 }
