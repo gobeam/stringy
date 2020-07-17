@@ -9,4 +9,4 @@ before_install:
 
 script:
   - go test -cover -coverprofile=.coverprofile $(go list .)
-  - $GOPATH/bin/goveralls -service=travis-ci -coverprofile=.coverprofile
+  - $GOPATH/bin/goveralls -service=travis-ci -coverprofile=.coverprofile -repotoken=REPO_TOKEN
