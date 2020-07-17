@@ -57,7 +57,7 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
 
 ## Why?
 
-Golang has very rich strings core package but some extra helper function and not available and this stringy package is here to fill that void. Plus there are other some packages in golang, that have same functionality but for some extreme cases they fail to provide correct output. This package cross flexibility is it's main advantage. You can convert to camelcase  to snakecase or kebabcase or vice versa. 
+Golang has very rich strings core package despite some extra helper function are not available and this stringy package is here to fill that void. Plus there are other some packages in golang, that have same functionality but for some extreme cases they fail to provide correct output. This package cross flexibility is it's main advantage. You can convert to camelcase  to snakecase or kebabcase or vice versa. 
 
 ```go
 package main
