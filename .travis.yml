@@ -1,6 +1,6 @@
 language: go
 sudo: false
-go_import_path: github.com/gobeam/Stringy
+go_import_path: github.com/gobeam/stringy
 go:
   - 1.13
 

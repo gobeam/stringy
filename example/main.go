@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	stringy "github.com/gobeam/Stringy"
+	"github.com/gobeam/stringy"
 )
 
 func main() {

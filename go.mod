@@ -1,3 +1,3 @@
-module github.com/gobeam/Stringy
+module github.com/gobeam/stringy
 
-go 1.13
+go 1.14
