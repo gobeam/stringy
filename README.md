@@ -342,7 +342,7 @@ $ go test
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Please make sure to update tests as appropriate. - see `CONTRIBUTING.md` for details.
 
 
 ## License
@@ -350,8 +350,8 @@ Please make sure to update tests as appropriate.
 Released under the MIT License - see `LICENSE.txt` for details.
 
 
-[Build-Status-Url]: https://travis-ci.org/gobeam/stringy
-[Build-Status-Image]: https://travis-ci.org/gobeam/stringy.svg?branch=master
+[Build-Status-Url]: https://travis-ci.com/gobeam/stringy
+[Build-Status-Image]: https://travis-ci.com/gobeam/stringy.svg?branch=master
 [godoc-url]: https://pkg.go.dev/github.com/gobeam/stringy?tab=doc
 [godoc-image]: https://godoc.org/github.com/gobeam/stringy?status.svg
 
