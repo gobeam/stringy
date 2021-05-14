@@ -337,8 +337,8 @@ LcFirst simply returns result by lower casing first letter of string and it can 
 Prefix makes sure string has been prefixed with a given string and avoids adding it again if it has.
 
 ```go
-ufo := stringy.New("known flying object")
-fmt.Println(ufo.Prefix("un")) // unknown flying object
+  ufo := stringy.New("known flying object")
+  fmt.Println(ufo.Prefix("un")) // unknown flying object
 ```
 
 
@@ -347,8 +347,8 @@ fmt.Println(ufo.Prefix("un")) // unknown flying object
 Suffix makes sure string has been suffixed with a given string and avoids adding it again if it has.
 
 ```go
-pun := stringy.New("this really is a cliff")
-fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
+  pun := stringy.New("this really is a cliff")
+  fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
 ```
 
 
