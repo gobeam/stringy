@@ -1,6 +1,7 @@
 package stringy
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -309,4 +310,30 @@ func TestInput_Last(t *testing.T) {
 	if last := lcn.Last(4); last != against {
 		t.Errorf("Expected: to be %s but got: %s", against, last)
 	}
+}
+
+func ExampleStringManipulation_Prefix() {
+	fmt.Println(New("foobar").Prefix("foo"))
+	fmt.Println(New("foobar").Prefix("foofoo"))
+	fmt.Println(New("foobar").Prefix("/"))
+	fmt.Println(New("").Prefix("_"))
+	// Output:
+	// foobar
+	// foofoofoobar
+	// /foobar
+	// _
+}
+
+func ExampleStringManipulation_Suffix() {
+	fmt.Println(New("foobar").Suffix("bar"))
+	fmt.Println(New("foobar").Suffix("barbar"))
+	fmt.Println(New("foobar").Suffix("/"))
+	fmt.Println(New("foobar/").Suffix("/"))
+	fmt.Println(New("").Suffix("_"))
+	// Output:
+	// foobar
+	// foobarbarbar
+	// foobar/
+	// foobar/
+	// _
 }

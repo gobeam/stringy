@@ -74,4 +74,9 @@ func main() {
 	last := lcn.Last(4)
 	fmt.Println(last) // 1348
 
+	ufo := stringy.New("known flying object")
+	fmt.Println(ufo.Prefix("un")) // unknown flying object
+
+	pun := stringy.New("this really is a cliff")
+	fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
 }

@@ -41,6 +41,8 @@ type StringManipulation interface {
 	ToLower() string
 	ToUpper() string
 	UcFirst() string
+	Prefix(with string) string
+	Suffix(with string) string
 }
 
 // New func returns pointer to input struct
@@ -328,4 +330,24 @@ func (i *input) ToUpper() string {
 func (i *input) UcFirst() string {
 	input := getInput(*i)
 	return ucfirst(input)
+}
+
+// Prefix makes sure that string is prefixed with a given string
+func (i *input) Prefix(with string) string {
+	input := getInput(*i)
+	if strings.HasPrefix(input, with) {
+		return input
+	}
+
+	return with + input
+}
+
+// Suffix makes sure that string is suffixed with a given string
+func (i *input) Suffix(with string) string {
+	input := getInput(*i)
+	if strings.HasSuffix(input, with) {
+		return input
+	}
+
+	return input + with
 }
