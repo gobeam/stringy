@@ -1,7 +1,6 @@
 package stringy
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -312,28 +311,30 @@ func TestInput_Last(t *testing.T) {
 	}
 }
 
-func ExampleStringManipulation_Prefix() {
-	fmt.Println(New("foobar").Prefix("foo"))
-	fmt.Println(New("foobar").Prefix("foofoo"))
-	fmt.Println(New("foobar").Prefix("/"))
-	fmt.Println(New("").Prefix("_"))
-	// Output:
-	// foobar
-	// foofoofoobar
-	// /foobar
-	// _
+func TestInput_Prefix(t *testing.T) {
+	str := New("foobar")
+	against := "foobar"
+	if val := str.Prefix("foo"); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+
+	str = New("foobar")
+	against = "foofoofoobar"
+	if val := str.Prefix("foofoo"); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
 }
 
-func ExampleStringManipulation_Suffix() {
-	fmt.Println(New("foobar").Suffix("bar"))
-	fmt.Println(New("foobar").Suffix("barbar"))
-	fmt.Println(New("foobar").Suffix("/"))
-	fmt.Println(New("foobar/").Suffix("/"))
-	fmt.Println(New("").Suffix("_"))
-	// Output:
-	// foobar
-	// foobarbarbar
-	// foobar/
-	// foobar/
-	// _
+func TestInput_Suffix(t *testing.T) {
+	str := New("foobar")
+	against := "foobar"
+	if val := str.Suffix("bar"); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+
+	str = New("foobar")
+	against = "foobarbarbar"
+	if val := str.Suffix("barbar"); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
 }
