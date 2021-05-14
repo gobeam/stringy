@@ -50,10 +50,10 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
      <tr>
          <td><a href="#firstlength-int-string">First</a></td>
          <td><a href="#lastlength-int-string">Last</a></td>
-         <td><a href="#prefix-string-string">Prefix</a></td>
+         <td><a href="#prefixstring-string">Prefix</a></td>
      </tr>
      <tr>
-         <td><a href="#suffix-string-string">Suffix</a></td>
+         <td><a href="#suffixstring-string">Suffix</a></td>
          <td></td>
          <td></td>
      </tr>
