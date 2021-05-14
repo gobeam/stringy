@@ -332,6 +332,26 @@ LcFirst simply returns result by lower casing first letter of string and it can 
 ```
 
 
+#### Prefix(string) string
+
+Prefix makes sure string has been prefixed with a given string and avoids adding it again if it has.
+
+```go
+ufo := stringy.New("known flying object")
+fmt.Println(ufo.Prefix("un")) // unknown flying object
+```
+
+
+#### Suffix(string) string
+
+Suffix makes sure string has been suffixed with a given string and avoids adding it again if it has.
+
+```go
+pun := stringy.New("this really is a cliff")
+fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
+```
+
+
 ## Running the tests
 
 ``` bash
