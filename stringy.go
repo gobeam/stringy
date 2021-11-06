@@ -180,10 +180,10 @@ func (i *input) Last(length int) string {
 // function which return StringManipulation interface
 func (i *input) LcFirst() string {
 	input := getInput(*i)
-	for i, v := range input {
-		return string(unicode.ToLower(v)) + input[i+1:]
+	for _, v := range input {
+		return string(unicode.ToLower(v)) + input[len(string(v)):]
 	}
-	return input
+	return ""
 }
 
 // Lines returns slice of strings by removing white space characters
