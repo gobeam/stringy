@@ -138,6 +138,11 @@ func TestInput_LcFirst(t *testing.T) {
 			arg:  "",
 			want: "",
 		},
+		{
+			name: "multi-byte leading character",
+			arg:  "ΔΔΔ",
+			want: "δΔΔ",
+		},
 	}
 
 	for _, tt := range tests {
