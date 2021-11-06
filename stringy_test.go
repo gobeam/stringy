@@ -123,18 +123,29 @@ func TestInput_KebabCase(t *testing.T) {
 }
 
 func TestInput_LcFirst(t *testing.T) {
-	str := New("This is an all lower")
-	against := "this is an all lower"
-	if val := str.LcFirst(); val != against {
-		t.Errorf("Expected: to be %s but got: %s", against, val)
+	tests := []struct {
+		name string
+		arg  string
+		want string
+	}{
+		{
+			name: "leading uppercase",
+			arg:  "This is an all lower",
+			want: "this is an all lower",
+		},
+		{
+			name: "empty string",
+			arg:  "",
+			want: "",
+		},
 	}
-}
 
-func TestInput_LcFirstEmpty(t *testing.T) {
-	str := New("")
-	against := ""
-	if val := str.LcFirst(); val != against {
-		t.Errorf("Expected: to be %s but got: %s", against, val)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := New(tt.arg).LcFirst(); got != tt.want {
+				t.Errorf("LcFirst(%v) = %v, want %v", tt.arg, got, tt.want)
+			}
+		})
 	}
 }
 
