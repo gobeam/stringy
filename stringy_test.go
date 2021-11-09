@@ -276,18 +276,34 @@ func TestInput_TeaseEmpty(t *testing.T) {
 }
 
 func TestInput_UcFirst(t *testing.T) {
-	str := New("this is test")
-	against := "This is test"
-	if val := str.UcFirst(); val != against {
-		t.Errorf("Expected: to be %s but got: %s", against, val)
+	tests := []struct {
+		name string
+		arg  string
+		want string
+	}{
+		{
+			name: "leading lowercase",
+			arg:  "test input",
+			want: "Test input",
+		},
+		{
+			name: "empty string",
+			arg:  "",
+			want: "",
+		},
+		{
+			name: "multi-byte leading character",
+			arg:  "δδδ",
+			want: "Δδδ",
+		},
 	}
-}
 
-func TestInput_EmptyUcFirst(t *testing.T) {
-	str := New("")
-	against := ""
-	if val := str.UcFirst(); val != against {
-		t.Errorf("Expected: to be %s but got: %s", against, val)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := New(tt.arg).UcFirst(); got != tt.want {
+				t.Errorf("UcFirst(%v) = %v, want %v", tt.arg, got, tt.want)
+			}
+		})
 	}
 }
 

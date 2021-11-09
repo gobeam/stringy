@@ -10,7 +10,7 @@ import (
 	"unicode"
 )
 
-// input is struct that holds input form user and result
+// input is struct that holds input from user and result
 type input struct {
 	Input  string
 	Result string
