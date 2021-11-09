@@ -59,8 +59,8 @@ func replaceStr(input, search, replace, types string) string {
 }
 
 func ucfirst(val string) string {
-	for i, v := range val {
-		return string(unicode.ToUpper(v)) + val[i+1:]
+	for _, v := range val {
+		return string(unicode.ToUpper(v)) + val[len(string(v)):]
 	}
 	return ""
 }
