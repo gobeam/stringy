@@ -18,4 +18,4 @@ const (
 var False = []string{"off", "no", "0", "false"}
 
 // True is slice of array for true logical representation in string
-var True = []string{"on", "yes", "1", "True"}
+var True = []string{"on", "yes", "1", "true"}
