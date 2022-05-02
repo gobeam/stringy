@@ -29,33 +29,42 @@ func TestInput_EmptyNoMatchBetween(t *testing.T) {
 	}
 }
 
-func TestInput_Boolean(t *testing.T) {
-	str := New("on")
-	val := str.Boolean()
-	if !val {
-		t.Errorf("Expected: to be true but got: %v", val)
+func TestInput_BooleanTrue(t *testing.T) {
+	strs := []string{"on", "On", "yes", "YES", "1", "true"}
+	for _, s := range strs {
+		t.Run(s, func(t *testing.T) {
+			if val := New(s).Boolean(); !val {
+				t.Errorf("Expected: to be true but got: %v", val)
+			}
+		})
 	}
 }
 
-func TestInput_BooleanOff(t *testing.T) {
-	str := New("off")
-	val := str.Boolean()
-	if val {
-		t.Errorf("Expected: to be false but got: %v", val)
+func TestInput_BooleanFalse(t *testing.T) {
+	strs := []string{"off", "Off", "no", "NO", "0", "false"}
+	for _, s := range strs {
+		t.Run(s, func(t *testing.T) {
+			if val := New(s).Boolean(); val {
+				t.Errorf("Expected: to be false but got: %v", val)
+			}
+		})
 	}
 }
 
 func TestInput_BooleanError(t *testing.T) {
-	defer func() {
-		if err := recover(); err == nil {
-			t.Errorf("Error expected")
-		}
-	}()
-	str := New("invalid")
-	val := str.Boolean()
-	if val {
-		t.Errorf("Expected: to be false but got: %v", val)
+	strs := []string{"invalid", "-1", ""}
+	for _, s := range strs {
+		t.Run(s, func(t *testing.T) {
+			defer func() {
+				if err := recover(); err == nil {
+					t.Errorf("Error expected")
+				}
+			}()
+			val := New(s).Boolean()
+			t.Errorf("Expected: to panic but got: %v", val)
+		})
 	}
+
 }
 
 func TestInput_CamelCase(t *testing.T) {
