@@ -329,7 +329,7 @@ ToUpper makes all string of user input to uppercase and it can be chained on fun
 
 #### UcFirst() string
 
-LcFirst simply returns result by lower casing first letter of string and it can be chained on function which return StringManipulation interface.
+UcFirst simply returns result by upper casing first letter of string and it can be chained on function which return StringManipulation interface.
 
 ```go
   contains := stringy.New("hello roshan")
