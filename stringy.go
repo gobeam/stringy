@@ -18,6 +18,7 @@ type input struct {
 
 // StringManipulation is an interface that holds all abstract methods to manipulate strings
 type StringManipulation interface {
+	Acronym() StringManipulation
 	Between(start, end string) StringManipulation
 	Boolean() bool
 	CamelCase(rule ...string) string
@@ -48,6 +49,20 @@ type StringManipulation interface {
 // New func returns pointer to input struct
 func New(val string) StringManipulation {
 	return &input{Input: val}
+}
+
+// Acronym func returns acronym of input string.
+// You can chain to upper which with make result all upercase or ToLower
+// which will make result all lower case or Get which will return result as it is
+func (i *input) Acronym() StringManipulation {
+	input := getInput(*i)
+	words := strings.Fields(input)
+	var acronym string
+	for _, word := range words {
+		acronym += string(word[0])
+	}
+	i.Result = acronym
+	return i
 }
 
 // Between takes two string params start and end which and returns

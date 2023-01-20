@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/gobeam/stringy"
 )
 
@@ -79,4 +80,7 @@ func main() {
 
 	pun := stringy.New("this really is a cliff")
 	fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
+
+	acronym := stringy.New("Laugh Out Loud")
+	fmt.Println(acronym.Acronym().ToLower()) // lol
 }
