@@ -55,7 +55,7 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
      <tr>
          <td><a href="#suffixstring-string">Suffix</a></td>
          <td><a href="#acronym-string">Acronym</a></td>
-         <td></td>
+        <td><a href="#title-string">Title</a></td>
      </tr>
 </table>
 
@@ -304,6 +304,15 @@ Tease takes two params length and indicator and it shortens given string on pass
 ```go
   teaseString := stringy.New("Hello My name is Roshan. I am full stack developer")
   fmt.Println(teaseString.Tease(20, "...")) // Hello My name is Ros...
+```
+
+#### Title() string
+
+Title returns string with first letter of each word in uppercase it can be chained on function which return StringManipulation interface.
+
+```go
+  title := stringy.New("hello roshan")
+  fmt.Println(title.Title()) // Hello Roshan
 ```
 
 

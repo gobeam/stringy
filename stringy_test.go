@@ -292,6 +292,14 @@ func TestInput_TeaseEmpty(t *testing.T) {
 	}
 }
 
+func TestInput_Title(t *testing.T) {
+	str := New("this is just AN eXample")
+	against := "This Is Just An Example"
+	if val := str.Title(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", against, val)
+	}
+}
+
 func TestInput_UcFirst(t *testing.T) {
 	tests := []struct {
 		name string
