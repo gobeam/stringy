@@ -6,6 +6,14 @@ import (
 
 var sm StringManipulation = New("This is example.")
 
+func TestInput_Acronym(t *testing.T) {
+	acronym := New("Laugh Out Loud")
+	val := acronym.Acronym().Get()
+	if val != "LOL" {
+		t.Errorf("Expected: %s but got: %s", "IS", val)
+	}
+}
+
 func TestInput_Between(t *testing.T) {
 	val := sm.Between("This", "example").ToUpper()
 	if val != "IS" {
