@@ -83,4 +83,7 @@ func main() {
 
 	acronym := stringy.New("Laugh Out Loud")
 	fmt.Println(acronym.Acronym().ToLower()) // lol
+
+	title := stringy.New("this is just AN eXample")
+	fmt.Println(title.Title()) // This Is Just An Example
 }

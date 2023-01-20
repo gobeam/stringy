@@ -39,6 +39,7 @@ type StringManipulation interface {
 	Surround(with string) string
 	SnakeCase(rule ...string) StringManipulation
 	Tease(length int, indicator string) string
+	Title() string
 	ToLower() string
 	ToUpper() string
 	UcFirst() string
@@ -335,6 +336,17 @@ func (i *input) Tease(length int, indicator string) string {
 func (i *input) ToLower() (result string) {
 	input := getInput(*i)
 	return strings.ToLower(input)
+}
+
+// Title makes first letter of each word of user input to uppercase
+// it can be chained on function which return StringManipulation interface
+func (i *input) Title() (result string) {
+	input := getInput(*i)
+	wordArray := strings.Split(input, " ")
+	for i, word := range wordArray {
+		wordArray[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
+	}
+	return strings.Join(wordArray, " ")
 }
 
 // ToUpper makes all string of user input to uppercase
