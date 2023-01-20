@@ -78,16 +78,16 @@ func TestInput_BooleanError(t *testing.T) {
 func TestInput_CamelCase(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
 	val := str.CamelCase("%", "")
-	if val != "CamelCaseThisComplicatedString" {
-		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
+	if val != "camelCaseThisComplicatedString" {
+		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
 	}
 }
 
 func TestInput_CamelCaseNoRule(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
 	val := str.CamelCase()
-	if val != "CamelCaseThisComplicatedString%%" {
-		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
+	if val != "camelCaseThisComplicatedString%%" {
+		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
 	}
 }
 
@@ -100,8 +100,8 @@ func TestInput_CamelCaseOddRuleError(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
 	val := str.CamelCase("%")
 
-	if val != "CamelCaseThisComplicatedString%%" {
-		t.Errorf("Expected: to be %s but got: %s", "CamelCaseThisComplicatedString", val)
+	if val != "camelCaseThisComplicatedString%%" {
+		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
 	}
 }
 
