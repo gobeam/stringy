@@ -119,7 +119,11 @@ func (i *input) CamelCase(rule ...string) string {
 	// removing excess space
 	wordArray := caseHelper(input, true, rule...)
 	for i, word := range wordArray {
-		wordArray[i] = ucfirst(word)
+		if i == 0 {
+			wordArray[i] = strings.ToLower(word)
+		} else {
+			wordArray[i] = ucfirst(word)
+		}
 	}
 	return strings.Join(wordArray, "")
 }
