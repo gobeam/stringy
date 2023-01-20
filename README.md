@@ -54,7 +54,7 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
      </tr>
      <tr>
          <td><a href="#suffixstring-string">Suffix</a></td>
-         <td></td>
+         <td><a href="#acronym-string">Acronym</a></td>
          <td></td>
      </tr>
 </table>
@@ -354,6 +354,16 @@ Suffix makes sure string has been suffixed with a given string and avoids adding
 ```go
   pun := stringy.New("this really is a cliff")
   fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
+```
+
+
+#### Acronym() string
+
+Acronym func returns acronym of input string. You can chain ToUpper() which with make result all upercase or ToLower() which will make result all lower case or Get which will return result as it is
+
+```go
+  acronym := stringy.New("Laugh Out Loud")
+	fmt.Println(acronym.Acronym().ToLower()) // lol
 ```
 
 

@@ -82,6 +82,5 @@ func main() {
 	fmt.Println(pun.Suffix("hanger")) // this really is a cliffhanger
 
 	acronym := stringy.New("Laugh Out Loud")
-	// fmt.Println(acronym.Acronym().Get())     // LOL
 	fmt.Println(acronym.Acronym().ToLower()) // lol
 }
