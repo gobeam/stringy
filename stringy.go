@@ -21,7 +21,8 @@ type StringManipulation interface {
 	Acronym() StringManipulation
 	Between(start, end string) StringManipulation
 	Boolean() bool
-	CamelCase(rule ...string) string
+	PascalCase(rule ...string) StringManipulation
+	CamelCase(rule ...string) StringManipulation
 	ContainsAll(check ...string) bool
 	Delimited(delimiter string, rule ...string) StringManipulation
 	First(length int) string
@@ -112,10 +113,11 @@ func (i *input) Boolean() bool {
 // CamelCase is variadic function which takes one Param rule i.e slice of strings and it returns
 // input type string in camel case form and rule helps to omit character you want to omit from string.
 // By default special characters like "_", "-","."," " are l\treated like word separator and treated
-// accordingly by default and you dont have to worry about it
+// accordingly by default and you don't have to worry about it
+// First letter will be lowercase.
 // Example input: hello user
-// Result : HelloUser
-func (i *input) CamelCase(rule ...string) string {
+// Result : helloUser
+func (i *input) CamelCase(rule ...string) StringManipulation {
 	input := getInput(*i)
 	// removing excess space
 	wordArray := caseHelper(input, true, rule...)
@@ -126,7 +128,25 @@ func (i *input) CamelCase(rule ...string) string {
 			wordArray[i] = ucfirst(word)
 		}
 	}
-	return strings.Join(wordArray, "")
+	i.Result = strings.Join(wordArray, "")
+	return i
+}
+
+// PascalCase is variadic function which takes one Param rule i.e slice of strings and it returns
+// input type string in camel case form and rule helps to omit character you want to omit from string.
+// By default special characters like "_", "-","."," " are l\treated like word separator and treated
+// accordingly by default and you don't have to worry about it
+// Example input: hello user
+// Result : HelloUser
+func (i *input) PascalCase(rule ...string) StringManipulation {
+	input := getInput(*i)
+	// removing excess space
+	wordArray := caseHelper(input, true, rule...)
+	for i, word := range wordArray {
+		wordArray[i] = ucfirst(word)
+	}
+	i.Result = strings.Join(wordArray, "")
+	return i
 }
 
 // ContainsAll is variadic function which takes slice of strings as param and checks if they are present
