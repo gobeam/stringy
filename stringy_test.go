@@ -77,16 +77,16 @@ func TestInput_BooleanError(t *testing.T) {
 
 func TestInput_CamelCase(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
-	val := str.CamelCase("%", "")
-	if val != "camelCaseThisComplicatedString" {
+	against := "camelCaseThisComplicatedString"
+	if val := str.CamelCase("%", "").Get(); val != against {
 		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
 	}
 }
 
 func TestInput_CamelCaseNoRule(t *testing.T) {
 	str := New("Camel case this_complicated__string%%")
-	val := str.CamelCase()
-	if val != "camelCaseThisComplicatedString%%" {
+	against := "camelCaseThisComplicatedString%%"
+	if val := str.CamelCase().Get(); val != against {
 		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
 	}
 }
@@ -98,10 +98,30 @@ func TestInput_CamelCaseOddRuleError(t *testing.T) {
 		}
 	}()
 	str := New("Camel case this_complicated__string%%")
-	val := str.CamelCase("%")
-
-	if val != "camelCaseThisComplicatedString%%" {
+	against := "camelCaseThisComplicatedString%%"
+	if val := str.CamelCase("%").Get(); val != against {
 		t.Errorf("Expected: to be %s but got: %s", "camelCaseThisComplicatedString", val)
+	}
+}
+
+func TestInput_PascalCaseNoRule(t *testing.T) {
+	str := New("pascal case this_complicated__string%%")
+	against := "PascalCaseThisComplicatedString%%"
+	if val := str.PascalCase().Get(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", "PascalCaseThisComplicatedString", val)
+	}
+}
+
+func TestInput_PascalCaseOddRuleError(t *testing.T) {
+	defer func() {
+		if err := recover(); err == nil {
+			t.Errorf("Error expected")
+		}
+	}()
+	str := New("pascal case this_complicated__string%%")
+	against := "PascalCaseThisComplicatedString%%"
+	if val := str.PascalCase("%").Get(); val != against {
+		t.Errorf("Expected: to be %s but got: %s", "PascalCaseThisComplicatedString", val)
 	}
 }
 

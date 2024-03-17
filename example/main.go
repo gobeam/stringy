@@ -26,7 +26,7 @@ func main() {
 	fmt.Println(snakeCase.SnakeCase("?", "").ToLower())
 
 	camelCase := stringy.New("ThisIsOne___messed up string. Can we Really camel-case It ?##")
-	fmt.Println(camelCase.CamelCase("?", "", "#", ""))
+	fmt.Println(camelCase.CamelCase("?", "", "#", "").Get())
 
 	delimiterString := stringy.New("ThisIsOne___messed up string. Can we Really delimeter-case It?")
 	fmt.Println(delimiterString.Delimited("?").Get())
@@ -58,7 +58,7 @@ func main() {
 	fmt.Println(surroundStr.Surround("-"))
 
 	str := stringy.New("hello__man how-Are you??")
-	result := str.CamelCase("?", "")
+	result := str.CamelCase("?", "").Get()
 	fmt.Println(result) // HelloManHowAreYou
 
 	snakeStr := str.SnakeCase("?", "")
