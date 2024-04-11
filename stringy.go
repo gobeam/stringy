@@ -10,6 +10,8 @@ import (
 	"unicode"
 )
 
+var matchWordRegexp = regexp.MustCompile(`[\s]*[\W]\pN`)
+
 // input is struct that holds input from user and result
 type input struct {
 	Input  string
@@ -228,9 +230,8 @@ func (i *input) LcFirst() string {
 
 // Lines returns slice of strings by removing white space characters
 func (i *input) Lines() []string {
-	input := getInput(*i)
-	matchWord := regexp.MustCompile(`[\s]*[\W]\pN`)
-	result := matchWord.ReplaceAllString(input, " ")
+	input := getInput(*i) 
+	result := matchWordRegexp.ReplaceAllString(input, " ")
 	return strings.Fields(strings.TrimSpace(result))
 }
 
