@@ -169,7 +169,7 @@ func (i *input) ContainsAll(check ...string) bool {
 // by default and you dont have to worry about it.
 func (i *input) Delimited(delimiter string, rule ...string) StringManipulation {
 	input := getInput(*i)
-	if strings.TrimSpace(delimiter) == "" {
+	if strings.TrimSpace(delimiter) == "" && delimiter != " " {
 		delimiter = "."
 	}
 	wordArray := caseHelper(input, false, rule...)
