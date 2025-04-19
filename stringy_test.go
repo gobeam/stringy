@@ -313,10 +313,69 @@ func TestInput_TeaseEmpty(t *testing.T) {
 }
 
 func TestInput_Title(t *testing.T) {
-	str := New("this is just AN eXample")
-	against := "This Is Just An Example"
-	if val := str.Title(); val != against {
-		t.Errorf("Expected: to be %s but got: %s", against, val)
+	tests := []struct {
+		name  string
+		input string
+		want  string
+	}{
+		{
+			name:  "basic title case",
+			input: "this is just AN eXample",
+			want:  "This Is Just An Example",
+		},
+		{
+			name:  "multiple spaces",
+			input: "hello    world",
+			want:  "Hello World",
+		},
+		{
+			name:  "tabs and spaces",
+			input: "hello\t\t\tworld ",
+			want:  "Hello World",
+		},
+		{
+			name:  "newlines",
+			input: "hello\nworld",
+			want:  "Hello World",
+		},
+		{
+			name:  "mixed whitespace",
+			input: "hello \t\n world",
+			want:  "Hello World",
+		},
+		{
+			name:  "leading and trailing whitespace",
+			input: "  hello world  ",
+			want:  "Hello World",
+		},
+		{
+			name:  "single word",
+			input: "hello",
+			want:  "Hello",
+		},
+		{
+			name:  "empty string",
+			input: "",
+			want:  "",
+		},
+		{
+			name:  "only whitespace",
+			input: "   \t\n  ",
+			want:  "",
+		},
+		{
+			name:  "special characters",
+			input: "hello-world",
+			want:  "Hello-world",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := New(tt.input).Title(); got != tt.want {
+				t.Errorf("Title() = %q, want %q", got, tt.want)
+			}
+		})
 	}
 }
 
