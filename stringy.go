@@ -230,7 +230,7 @@ func (i *input) LcFirst() string {
 
 // Lines returns slice of strings by removing white space characters
 func (i *input) Lines() []string {
-	input := getInput(*i) 
+	input := getInput(*i)
 	result := matchWordRegexp.ReplaceAllString(input, " ")
 	return strings.Fields(strings.TrimSpace(result))
 }
@@ -363,7 +363,7 @@ func (i *input) ToLower() (result string) {
 // it can be chained on function which return StringManipulation interface
 func (i *input) Title() (result string) {
 	input := getInput(*i)
-	wordArray := strings.Split(input, " ")
+	wordArray := strings.Fields(input)
 	for i, word := range wordArray {
 		wordArray[i] = strings.ToUpper(string(word[0])) + strings.ToLower(word[1:])
 	}
