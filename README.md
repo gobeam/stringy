@@ -13,55 +13,70 @@ Convert string to camel case, snake case, kebab case / slugify, custom delimiter
 
 <table>
     <tr>
+        <td><a href="#acronym-string">Acronym</a></td>
         <td><a href="#betweenstart-end-string-stringmanipulation">Between</a></td>
         <td><a href="#boolean-bool">Boolean</a></td>
-        <td><a href="#camelcaserule-string-string">CamelCase</a></td>
     </tr>
     <tr>
+        <td><a href="#camelcaserule-string-string">CamelCase</a></td>
         <td><a href="#containsallcheck-string-bool">ContainsAll</a></td>
+        <td><a href="#containssubstring-string-bool">Contains</a></td>
+    </tr>
+    <tr>
         <td><a href="#delimiteddelimiter-string-rule-string-stringmanipulation">Delimited</a></td>
+        <td><a href="#firstlength-int-string">First</a></td>
         <td><a href="#get-string">Get</a></td>
     </tr>
     <tr>
+        <td><a href="#isempty-bool">IsEmpty</a></td>
         <td><a href="#kebabcaserule-string-stringmanipulation">KebabCase</a></td>
+        <td><a href="#lastlength-int-string">Last</a></td>
+    </tr>
+    <tr>
         <td><a href="#lcfirst-string">LcFirst</a></td>
         <td><a href="#lines-string">Lines</a></td>
-    </tr>
-    <tr>
         <td><a href="#padlength-int-with-padtype-string-string">Pad</a></td>
-        <td><a href="#removespecialcharacter-string">RemoveSpecialCharacter</a></td>
-        <td><a href="#replacefirstsearch-replace-string-string">ReplaceFirst</a></td>
     </tr>
     <tr>
+        <td><a href="#pascalcaserule-string-string">PascalCase</a></td>
+        <td><a href="#prefixstring-string">Prefix</a></td>
+        <td><a href="#removespecialcharacter-string">RemoveSpecialCharacter</a></td>
+    </tr>
+    <tr>
+        <td><a href="#replaceallsearch-replace-string-stringmanipulation">ReplaceAll</a></td>
+        <td><a href="#replacefirstsearch-replace-string-string">ReplaceFirst</a></td>
         <td><a href="#replacelastsearch-replace-string-string">ReplaceLast</a></td>
+    </tr>
+    <tr>
         <td><a href="#reverse-string">Reverse</a></td>
+        <td><a href="#sentencecaserule-string-stringmanipulation">SentenceCase</a></td>
         <td><a href="#shuffle-string">Shuffle</a></td>
     </tr>
     <tr>
-        <td><a href="#surroundwith-string-string">Surround</a></td>
+        <td><a href="#slugifywithcountcount-int-stringmanipulation">SlugifyWithCount</a></td>
         <td><a href="#snakecaserule-string-stringmanipulation">SnakeCase</a></td>
+        <td><a href="#substringstart-end-int-stringmanipulation">Substring</a></td>
+    </tr>
+    <tr>
+        <td><a href="#suffixstring-string">Suffix</a></td>
+        <td><a href="#surroundwith-string-string">Surround</a></td>
         <td><a href="#teaselength-int-indicator-string-string">Tease</a></td>
     </tr>
     <tr>
+        <td><a href="#title-string">Title</a></td>
         <td><a href="#tolower-string">ToLower</a></td>
         <td><a href="#toupper-string">ToUpper</a></td>
+    </tr>
+    <tr>
+        <td><a href="#trimcutset-string-stringmanipulation">Trim</a></td>
+        <td><a href="#truncatewordscount-int-suffix-string-stringmanipulation">TruncateWords</a></td>
         <td><a href="#ucfirst-string">UcFirst</a></td>
     </tr>
-     <tr>
-         <td><a href="#firstlength-int-string">First</a></td>
-         <td><a href="#lastlength-int-string">Last</a></td>
-         <td><a href="#prefixstring-string">Prefix</a></td>
-     </tr>
-     <tr>
-         <td><a href="#suffixstring-string">Suffix</a></td>
-         <td><a href="#acronym-string">Acronym</a></td>
-        <td><a href="#title-string">Title</a></td>
-     </tr>
-     <tr>
-         <td><a href="#pascalcaserule-string-string">PascalCase</a></td>
-         <td></td>
+    <tr>
+        <td><a href="#wordcount-int">WordCount</a></td>
+        <td><a href="#substringstart-end-int-stringmanipulation">Substring</a></td>
         <td></td>
-     </tr>
+    </tr>
 </table>
 
 
@@ -138,6 +153,16 @@ look how it omitted ?## from string. If you dont want to omit anything and since
   fmt.Println(camelCase.CamelCase()) // thisIsOneMessedUpStringCanWeReallyCamelCaseIt?##
 ```
 
+#### Contains(substring string) bool
+
+Contains checks if the string contains the specified substring and returns a boolean value. This is a wrapper around Go's standard strings.Contains function that fits into the Stringy interface.
+
+```go
+  str := stringy.New("Hello World")
+  fmt.Println(str.Contains("World")) // true
+  fmt.Println(str.Contains("Universe")) // false
+  ```
+
 #### ContainsAll(check ...string) bool
 
 ContainsAll is variadic function which takes slice of strings as param and checks if they are present in input and returns boolean value accordingly.
@@ -172,6 +197,33 @@ First returns first n characters from provided input. It removes all spaces in s
 #### Get() string
 
 Get simply returns result and can be chained on function which returns StringManipulation interface view above examples
+
+```go
+  getString := stringy.New("hello roshan")
+  fmt.Println(getString.Get()) // hello roshan
+```
+
+#### IsEmpty() bool
+IsEmpty checks if the string is empty or contains only whitespace characters. It returns true for empty strings or strings containing only spaces, tabs, or newlines.
+
+```go
+  emptyStr := stringy.New("")
+  fmt.Println(emptyStr.IsEmpty()) // true
+  
+  whitespaceStr := stringy.New("   \t\n")
+  fmt.Println(whitespaceStr.IsEmpty()) // true
+  
+  normalStr := stringy.New("Hello")
+  fmt.Println(normalStr.IsEmpty()) // false
+
+  emptyStr := stringy.New("")
+  fmt.Println(emptyStr.IsEmpty()) // true
+  
+  whitespaceStr := stringy.New("   \t\n")
+  fmt.Println(whitespaceStr.IsEmpty()) // true
+  
+  normalStr := stringy.New("Hello")
+  fmt.Println(normalStr.IsEmpty()) // false
 
 
 #### KebabCase(rule ...string) StringManipulation
@@ -249,6 +301,15 @@ ReplaceFirst takes two param search and replace. It returns string by searching 
   fmt.Println(replaceFirst.ReplaceFirst("name", "nombre")) // Hello My nombre is Roshan and his name is Alis.
 ```
 
+### ReplaceAll(search, replace string) StringManipulation
+ReplaceAll replaces all occurrences of a search string with a replacement string. It complements the existing ReplaceFirst and ReplaceLast methods and provides a chainable wrapper around Go's strings.ReplaceAll function.
+```go 
+go  str := stringy.New("Hello World World")
+  fmt.Println(str.ReplaceAll("World", "Universe").Get()) // Hello Universe Universe
+  
+  // Chain with other methods
+  fmt.Println(str.ReplaceAll("World", "Universe").ToUpper()) // HELLO UNIVERSE UNIVERSE
+```
 
 #### ReplaceLast(search, replace string) string
 
@@ -268,6 +329,19 @@ Reverse function reverses the passed strings it can be chained on function which
   reverse := stringy.New("This is only test")
   fmt.Println(reverse.Reverse()) // tset ylno si sihT
 ```
+
+#### SentenceCase(rule ...string) StringManipulation
+
+SentenceCase is a variadic function that takes one parameter: slice of strings named rule. It converts text from various formats (camelCase, snake_case, kebab-case, etc.) to sentence case format, where the first word is capitalized and the rest are lowercase, with words separated by spaces. Rule parameter helps to omit characters you want to omit from the string. By default, special characters like "_", "-", ".", " " are treated as word separators.
+
+```go
+  str := stringy.New("thisIsCamelCase_with_snake_too")
+  fmt.Println(str.SentenceCase().Get())  // This is camel case with snake too
+  
+  mixedStr := stringy.New("THIS-IS-KEBAB@and#special&chars")
+  fmt.Println(mixedStr.SentenceCase("@", " ", "#", " ", "&", " ").Get())  // This is kebab and special chars
+```
+You can chain ToUpper which will make the result all uppercase or Get which will return the result as it is. The first word is automatically capitalized, and all other words are lowercase.
 
 
 #### Shuffle() string
@@ -301,6 +375,19 @@ SnakeCase is variadic function that takes one Param slice of strings named rule 
 ```
 You can chain to upper which with make result all uppercase or ToLower which will make result all lower case or Get which will return result as it is.
 
+#### Substring(start, end int) StringManipulation
+Substring extracts part of a string from the start position (inclusive) to the end position (exclusive). It handles multi-byte characters correctly and has safety checks for out-of-bounds indices.
+```go
+  // Basic usage
+go  str := stringy.New("Hello World")
+  fmt.Println(str.Substring(0, 5).Get()) // Hello
+  fmt.Println(str.Substring(6, 11).Get()) // World
+  
+  // With multi-byte characters
+  str = stringy.New("Hello 世界")
+  fmt.Println(str.Substring(6, 8).Get()) // 世界
+```  
+
 
 #### Tease(length int, indicator string) string
 
@@ -329,6 +416,20 @@ ToLower makes all string of user input to lowercase and it can be chained on fun
   snakeCase := stringy.New("ThisIsOne___messed up string. Can we Really Snake Case It?")
   fmt.Println(snakeCase.SnakeCase("?", "").ToLower()) // this_is_one_messed_up_string_can_we_really_snake_case_it
 ```
+
+### Trim(cutset ...string) StringManipulation
+Trim removes leading and trailing whitespace or specified characters from the string. If no characters are specified, it trims whitespace by default. It can be chained with other methods that return StringManipulation interface.
+```go
+  trimString := stringy.New("  Hello World  ")
+  fmt.Println(trimString.Trim().Get())  // Hello World
+  
+  specialTrim := stringy.New("!!!Hello World!!!")
+  fmt.Println(specialTrim.Trim("!").Get())  // Hello World
+  
+  chainedTrim := stringy.New("  hello world  ")
+  fmt.Println(chainedTrim.Trim().UcFirst())  // Hello world
+```
+You can chain ToUpper which will make the result all uppercase, ToLower which will make the result all lowercase, or Get which will return the result as it is.
 
 
 #### ToUpper() string
@@ -373,6 +474,9 @@ Suffix makes sure string has been suffixed with a given string and avoids adding
 
 #### Acronym() string
 
+SlugifyWithCount(count int) StringManipulation
+SlugifyWithCount creates a URL-friendly slug with an optional uniqueness counter appended. This is useful for creating unique URL slugs for blog posts, articles, or database entries.
+
 Acronym func returns acronym of input string. You can chain ToUpper() which with make result all upercase or ToLower() which will make result all lower case or Get which will return result as it is
 
 ```go
@@ -395,9 +499,71 @@ look how it omitted ?## from string. If you dont want to omit anything and since
   fmt.Println(pascalCase.PascalCase()) // ThisIsOneMessedUpStringCanWeReallyCamelCaseIt?##
 ```
 
+#### SlugifyWithCount(count int) StringManipulation
+SlugifyWithCount creates a URL-friendly slug with an optional uniqueness counter appended. This is useful for creating unique URL slugs for blog posts, articles, or database entries.
+```go
+  slug := stringy.New("Hello World")
+  fmt.Println(slug.SlugifyWithCount(1).Get()) // hello-world-1
+  fmt.Println(slug.SlugifyWithCount(2).ToUpper()) // HELLO-WORLD-2
+```
+
+#### TruncateWords(count int, suffix string) StringManipulation
+TruncateWords truncates the string to a specified number of words and appends a suffix. This is useful for creating previews or summaries of longer text.
+
+```go
+  truncate := stringy.New("This is a long sentence that needs to be truncated.")
+  fmt.Println(truncate.TruncateWords(5, "...").Get()) // This is a long sentence...
+  fmt.Println(truncate.TruncateWords(3, "...").ToUpper()) // THIS IS A LONG...
+```
+
+#### WordCount() int
+WordCount returns the number of words in the string. It uses whitespace as the word separator and can be chained with other methods.
+
+```go
+  wordCount := stringy.New("Hello World")
+  fmt.Println(wordCount.WordCount()) // 2
+  
+  multiByteCount := stringy.New("Hello 世界")
+  fmt.Println(multiByteCount.WordCount()) // 2
+```
+
+#### Substring(start, end int) StringManipulation
+Substring extracts part of a string from the start position (inclusive) to the end position (exclusive). It handles multi-byte characters correctly and has safety checks for out-of-bounds indices.
+
+```go
+  // Basic usage
+  str := stringy.New("Hello World")
+  fmt.Println(str.Substring(0, 5).Get()) // Hello
+  fmt.Println(str.Substring(6, 11).Get()) // World
+  
+  // With multi-byte characters
+  str = stringy.New("Hello 世界")
+  fmt.Println(str.Substring(6, 8).Get()) // 世界
+```
+
+#### Contains(substring string) bool
+Contains checks if the string contains the specified substring and returns a boolean value. This is a wrapper around Go's standard strings.Contains function that fits into the Stringy interface.
+
+```go
+  str := stringy.New("Hello World")
+  fmt.Println(str.Contains("World")) // true
+  fmt.Println(str.Contains("Universe")) // false
+```
+
+#### ReplaceAll(search, replace string) StringManipulation
+ReplaceAll replaces all occurrences of a search string with a replacement string. It complements the existing ReplaceFirst and ReplaceLast methods and provides a chainable wrapper around Go's strings.ReplaceAll function.
+
+```go
+  str := stringy.New("Hello World World")
+  fmt.Println(str.ReplaceAll("World", "Universe").Get()) // Hello Universe Universe
+  
+  // Chain with other methods
+  fmt.Println(str.ReplaceAll("World", "Universe").ToUpper()) // HELLO UNIVERSE UNIVERSE
+```
+
+
 
 ## Running the tests
-
 ``` bash
 $ go test
 ```
