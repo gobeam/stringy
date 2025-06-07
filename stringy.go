@@ -309,7 +309,7 @@ func (i *input) ContainsAll(check ...string) bool {
  */
 func (i *input) Delimited(delimiter string, rule ...string) StringManipulation {
 	input := getInput(*i)
-	if strings.TrimSpace(delimiter) == "" {
+	if strings.TrimSpace(delimiter) == "" && delimiter != " " {
 		delimiter = "."
 	}
 	words, err := caseHelper(input, false, rule...)
